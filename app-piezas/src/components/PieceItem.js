@@ -6,7 +6,7 @@ export default function PieceItem({ piece, onDelete, onView }) {
     <TouchableOpacity onPress={onView} style={styles.item}>
       <View style={{ flex: 1 }}>
         <Text style={styles.text}>Pieza: {piece.tipo}</Text>
-        <Text style={styles.text}>Fecha: {piece.fecha}</Text>
+        <Text style={styles.text}>Fecha de cambio: {piece.fecha}</Text>
       </View>
       <Button title="Eliminar" onPress={() => onDelete(piece.id)} />
     </TouchableOpacity>

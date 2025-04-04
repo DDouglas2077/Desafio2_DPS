@@ -3,7 +3,7 @@ import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import PieceItem from '../components/PieceItem';
 import AddPieceModal from '../components/AddPieceModal';
 import PieceDetailsModal from '../components/PieceDetailsModal';
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'react-native-uuid';
 
 export default function HomeScreen() {
   const [pieces, setPieces] = useState([]);
@@ -11,7 +11,7 @@ export default function HomeScreen() {
   const [addModalVisible, setAddModalVisible] = useState(false);
 
   const addPiece = (newPiece) => {
-    setPieces(prev => [...prev, { ...newPiece, id: uuidv4() }]);
+    setPieces(prev => [...prev, { ...newPiece, id: uuid.v4() }]);
     setAddModalVisible(false);
   };
 
