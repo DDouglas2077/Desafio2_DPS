@@ -21,15 +21,26 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Button title="Agregar Pieza" onPress={() => setAddModalVisible(true)} />
+      <View style={styles.header}>
+        <Text style={styles.title}>Piezas</Text>
+        <Button title="Agregar Pieza" onPress={() => setAddModalVisible(true)} />
+      </View>
       <FlatList
         data={pieces.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <PieceItem piece={item} onDelete={deletePiece} onView={() => setSelectedPiece(item)} />
+          <PieceItem
+            piece={item}
+            onDelete={deletePiece}
+            onView={() => setSelectedPiece(item)}
+          />
         )}
       />
-      <AddPieceModal visible={addModalVisible} onClose={() => setAddModalVisible(false)} onSave={addPiece} />
+      <AddPieceModal
+        visible={addModalVisible}
+        onClose={() => setAddModalVisible(false)}
+        onSave={addPiece}
+      />
       {selectedPiece && (
         <PieceDetailsModal
           visible={!!selectedPiece}
@@ -42,5 +53,18 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20 },
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
 });
