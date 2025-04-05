@@ -4,6 +4,7 @@ import PieceItem from '../components/PieceItem';
 import AddPieceModal from '../components/AddPieceModal';
 import PieceDetailsModal from '../components/PieceDetailsModal';
 import uuid from 'react-native-uuid';
+import colors from '../utils/colors'; 
 
 export default function HomeScreen() {
   const [pieces, setPieces] = useState([]);
@@ -23,24 +24,31 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Piezas</Text>
-        <Button title="Agregar Pieza" onPress={() => setAddModalVisible(true)} />
+        <Button title="Agregar Pieza" onPress={() => setAddModalVisible(true)} color={colors.primary} />
       </View>
-      <FlatList
-        data={pieces.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <PieceItem
-            piece={item}
-            onDelete={deletePiece}
-            onView={() => setSelectedPiece(item)}
-          />
-        )}
-      />
+
+      {pieces.length === 0 ? (
+        <Text style={styles.emptyText}>No hay piezas. Agregue una.</Text>
+      ) : (
+        <FlatList
+          data={pieces.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <PieceItem
+              piece={item}
+              onDelete={deletePiece}
+              onView={() => setSelectedPiece(item)}
+            />
+          )}
+        />
+      )}
+
       <AddPieceModal
         visible={addModalVisible}
         onClose={() => setAddModalVisible(false)}
         onSave={addPiece}
       />
+
       {selectedPiece && (
         <PieceDetailsModal
           visible={!!selectedPiece}
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: colors.background, 
   },
   header: {
     flexDirection: 'row',
@@ -66,5 +75,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: colors.text,
+  },
+  emptyText: {
+    marginTop: 30,
+    fontSize: 16,
+    textAlign: 'center',
+    color: colors.textLight,
   },
 });

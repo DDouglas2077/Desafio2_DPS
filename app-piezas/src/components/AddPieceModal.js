@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { Modal, View, Text, TextInput, Button, StyleSheet, Platform, TouchableWithoutFeedback, Keyboard, } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import colors from "../utils/colors";
 
